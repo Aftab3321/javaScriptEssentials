@@ -25,7 +25,8 @@ function showbooks() {
         <p><strong>Book Name: </strong>${book.name}</p>
         <p><strong>Author Name:</strong> ${book.authorName}</p>
         <p><strong>Book Description:</strong> ${book.bookDescription}</p>
-        <p><strong>No. of Pages:</strong> ${book.pagesNumber} page(s)</p>`
+        <p><strong>No. of Pages:</strong> ${book.pagesNumber} page(s)</p>
+        <button data-id='${index}' onclick=deleteBook(event)>Delete Book</button>`
     );
     document.getElementById('books').innerHTML = booksDiv.join('');
 }
@@ -35,4 +36,15 @@ function showbooks() {
             document.getElementById('authorName').value = '';
             document.getElementById('bookDescription').value = '';
             document.getElementById('pagesNumber').value = '';
+ }
+
+ function removeBookByID(id) {
+    books.splice(id, 1)
+ }
+
+ function deleteBook(e) {
+    e.preventDefault();
+    let bookID = e.target.attributes['data-id'].value;
+    removeBookByID(bookID);
+    showbooks();
  }
